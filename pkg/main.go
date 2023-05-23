@@ -6,13 +6,16 @@ import (
 	"github.com/kapildev333/go_safety_plan/pkg/models"
 )
 
-func main(){
+func main() {
 	models.ConnectDataBase()
 	r := gin.Default()
-	
+
 	public := r.Group("/api")
 
-	public.POST("/register", controllers.RegisterUser)
-
-	r.Run(":8080")
+	public.POST("/register", controllers.Register)
+	public.GET("/login", controllers.Login)
+	err := r.Run(":8080")
+	if err != nil {
+		return
+	}
 }
